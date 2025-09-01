@@ -81,3 +81,48 @@ const gameboard = (function () {
     return {markSpace, isAnyRowComplete, isAnySpaceLeft, resetBoard};
 })();
 
+// module controlling game flow
+const gameController = (function () {
+    const States= Object.freeze({
+        PREPARATION: Symbol("preparation"),
+        RUNNING:  Symbol("running"),
+        OVER_WON: Symbol("won"),
+        OVER_TIE: Symbol("tie"),
+    });
+
+    let gameState = States.PREPARATION;
+
+    const players = [];
+    // points to player whose turn it currently is
+    let activePlayer = 0;
+
+    const startNewGame = (firstPlayerName, secondPlayerName) => {
+        players.length = 0;
+        activePlayer = 0;
+
+        const firstPlayer = createPlayer("x", firstPlayerName);
+        const secondPlayer = createPlayer("o", secondPlayerName);
+        players.push(firstPlayer);
+        players.push(secondPlayer);
+
+        gameState = States.RUNNING;
+    };
+
+    const playRound = () => {
+
+    };
+
+    const makeTurn = (cellIndex) => {
+    };
+
+    function createPlayer(playerSymbol, name) {
+        let gamesWon = 0;
+
+        const win = () => gamesWon++;
+        const getWonGames = () => gamesWon;
+
+        return {getWonGames, win, playerSymbol, name};
+    }
+
+    return {};
+})();
