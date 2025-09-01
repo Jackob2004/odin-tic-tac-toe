@@ -98,16 +98,29 @@ const gameController = (function () {
     // points to player whose turn it currently is
     let activePlayer = 0;
 
+    /**
+     * starts a new round preserving players data
+     */
+    const playRound = () => {
+        activePlayer = 0;
+        gameState = States.RUNNING;
+        gameboard.resetBoard();
+    };
+
+    /**
+     * starts a completely new game with new players
+     * @param {string} firstPlayerName
+     * @param {string} secondPlayerName
+     */
     const startNewGame = (firstPlayerName, secondPlayerName) => {
         players.length = 0;
-        activePlayer = 0;
 
         const firstPlayer = createPlayer("x", firstPlayerName);
         const secondPlayer = createPlayer("o", secondPlayerName);
         players.push(firstPlayer);
         players.push(secondPlayer);
 
-        gameState = States.RUNNING;
+        playRound();
     };
 
     const evaluateGameState = () => {
@@ -117,10 +130,6 @@ const gameController = (function () {
         } else if (!gameboard.isAnySpaceLeft()) {
             gameState = States.OVER_TIE;
         }
-    };
-
-    const playRound = () => {
-
     };
 
     /**
@@ -158,5 +167,5 @@ const gameController = (function () {
         return {getWonGames, win, playerSymbol, name};
     }
 
-    return {};
+    return {startNewGame, takeTurn, playRound};
 })();
