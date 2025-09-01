@@ -100,8 +100,12 @@ const gameController = (function () {
 
     /**
      * starts a new round preserving players data
+     * @throws {error} on calling function when game has not started and player profiles have not been initialized
      */
     const playRound = () => {
+        if (players.length === 0) {
+            throw new Error("Cannot play round: Game has not started");
+        }
         activePlayer = 0;
         gameState = States.RUNNING;
         gameboard.resetBoard();
