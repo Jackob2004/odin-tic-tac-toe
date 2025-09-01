@@ -16,7 +16,7 @@ const gameboard = (function () {
      *
      * @param {number} cellIndex
      * @param {string} playerSymbol
-     * @returns {boolean} returns true if cell wasn't already occupied
+     * @returns {boolean} true if cell wasn't already occupied
      * @throws {RangeError} on marking index out of array bounds
      *
      */
@@ -58,6 +58,8 @@ const gameboard = (function () {
      * @returns {boolean} true if any combination is complete
      */
     const isAnyRowComplete = () => {
+        if (takenCells < 3) return false;
+
         for (let i = 0; i < winningCombinations.length; i++) {
             if (checkSingleCombination(winningCombinations[i])) {
                 return true;
@@ -108,13 +110,45 @@ const gameController = (function () {
         gameState = States.RUNNING;
     };
 
+    const evaluateGameState = () => {
+        if (gameboard.isAnyRowComplete()) {
+            gameState = States.OVER_WON;
+            players[activePlayer].win();
+        } else if (!gameboard.isAnySpaceLeft()) {
+            gameState = States.OVER_TIE;
+        }
+    };
+
     const playRound = () => {
 
     };
 
-    const makeTurn = (cellIndex) => {
+    /**
+     *
+     * @param {number} cellIndex
+     * @returns {string|null} null if game is over or space is occupied
+                              otherwise symbol of a player who took this turn
+     */
+    const takeTurn = (cellIndex) => {
+        if (gameState !== States.RUNNING) return null;
+
+        const playerSymbol = players[activePlayer].playerSymbol;
+        if (!gameboard.markSpace(cellIndex, playerSymbol)) return null;
+
+        evaluateGameState();
+
+        if (gameState === States.RUNNING) {
+            activePlayer = (activePlayer === 0) ? 1 : 0;
+        }
+
+        return playerSymbol;
     };
 
+    /**
+     *
+     * @param {string} playerSymbol player marking symbol
+     * @param {string} name
+     */
     function createPlayer(playerSymbol, name) {
         let gamesWon = 0;
 
