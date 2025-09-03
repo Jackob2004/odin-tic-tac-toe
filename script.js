@@ -113,8 +113,8 @@ const gameController = (function () {
 
     /**
      * starts a completely new game with new players
-     * @param {string} firstPlayerName
-     * @param {string} secondPlayerName
+     * @param {string} firstPlayerName - name of a player who will be recognized by 'x' symbol
+     * @param {string} secondPlayerName - name of a player who will be recognized by 'o' symbol
      */
     const startNewGame = (firstPlayerName, secondPlayerName) => {
         players.length = 0;
@@ -158,6 +158,54 @@ const gameController = (function () {
     };
 
     /**
+     * Gets data (name and games won) for both players.
+     *
+     * @returns {Object.<string, {name: string, gamesWon: number}>|null}
+     *   player data mapped by symbol, or null if game is in preparation
+     * @example { 'x': { name: 'Alice', gamesWon: 3 }, 'o': { name: 'Bob', gamesWon: 1 } }
+     */
+    const getPlayersData = () => {
+        if (gameState === States.PREPARATION) return null;
+
+        return {
+            [players[0].playerSymbol]: {name: players[0].name, gamesWon: players[0].getWonGames()},
+            [players[1].playerSymbol]: {name: players[1].name, gamesWon: players[1].getWonGames()},
+        };
+    };
+
+    /**
+     *
+     * @returns {{message: string, winnerName: string}|null} game result object or null if game is ongoing or has not started
+     */
+    const getGameResult = () => {
+        let result = null;
+
+        if (gameState === States.OVER_WON) {
+            result = {message: "GAME OVER!", winnerName: players[activePlayer].name};
+        } else if (gameState === States.OVER_TIE) {
+            result = {message: "GAME TIE!", winnerName: "NO ONE!"};
+        }
+
+        return result;
+    };
+
+    /**
+     *
+     * @returns {string|null} symbol of a player whose turn it is right now or null if game has not started
+     */
+    const getActivePlayerSymbol = () => {
+        if (gameState === States.PREPARATION) return null;
+
+        return players[activePlayer].playerSymbol;
+    };
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    const isGameOver = () => gameState === States.OVER_WON || gameState === States.OVER_TIE;
+
+    /**
      *
      * @param {string} playerSymbol player marking symbol
      * @param {string} name
@@ -166,10 +214,14 @@ const gameController = (function () {
         let gamesWon = 0;
 
         const win = () => gamesWon++;
+        /**
+         *
+         * @returns {number}
+         */
         const getWonGames = () => gamesWon;
 
         return {getWonGames, win, playerSymbol, name};
     }
 
-    return {startNewGame, takeTurn, playRound};
+    return {startNewGame, takeTurn, playRound, getPlayersStats, getGameResult, isGameOver, getActivePlayerSymbol};
 })();
