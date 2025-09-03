@@ -226,6 +226,44 @@ const gameController = (function (board) {
     return {startNewGame, takeTurn, playRound, getPlayersData, getGameResult, isGameOver, getActivePlayerSymbol};
 })(gameboard);
 
+const modalDialog = (function (doc){
+    const dialogWindow = doc.querySelector("dialog");
+    const form = doc.querySelector("form");
+
+    doc.querySelector("#start-btn").addEventListener("click", () => dialogWindow.showModal());
+
+    doc.querySelector("#cancel-start-btn").addEventListener("click", () => {
+        dialogWindow.close();
+        form.reset();
+    });
+
+    doc.querySelector("form").addEventListener("submit", () => {
+        const formData = new FormData(form);
+        dispatchStartConfirmEvent(formData.get("first-player"), formData.get("second-player"));
+
+        form.reset();
+    });
+
+    /**
+     *
+     * @param {string} firstPlayerName (x)
+     * @param {string} secondPlayerName (o)
+     */
+    function dispatchStartConfirmEvent(firstPlayerName, secondPlayerName) {
+        const event = new CustomEvent("start-confirm", {
+            detail: {
+                firstPlayer: firstPlayerName,
+                secondPlayer: secondPlayerName,
+            },
+            bubbles: true,
+        });
+
+        dialogWindow.dispatchEvent(event);
+    }
+
+    return {};
+})(document);
+
 const displayController = (function (doc, game){
 
     return {};
