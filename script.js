@@ -2,6 +2,8 @@ const gameboard = (function () {
     const boardState = new Array(9).fill(null);
     // signalizes tie
     let takenCells= 0;
+
+    let winningCombination = null;
     // indexes to check
     const winningCombinations = [
         // horizontal
@@ -44,6 +46,7 @@ const gameboard = (function () {
 
         for (let i = 0; i < winningCombinations.length; i++) {
             if (checkSingleCombination(winningCombinations[i])) {
+                winningCombination = winningCombinations[i];
                 return true;
             }
         }
@@ -60,7 +63,14 @@ const gameboard = (function () {
     const resetBoard = () => {
         boardState.fill(null);
         takenCells = 0;
+        winningCombination = null;
     };
+
+    /**
+     *
+     * @returns {array.<number>|null} null when no row is complete yet
+     */
+    const getWinningCombination = () => winningCombination;
 
     /**
      *
@@ -80,7 +90,7 @@ const gameboard = (function () {
         return true;
     }
 
-    return {markSpace, isAnyRowComplete, isAnySpaceLeft, resetBoard};
+    return {markSpace, isAnyRowComplete, isAnySpaceLeft, getWinningCombination, resetBoard};
 })();
 
 // module controlling game flow
@@ -164,21 +174,6 @@ const gameController = (function (board) {
         };
     };
 
-    /**
-     *
-     * @returns {{message: string, winnerName: string}|null} game result object or null if game is ongoing or has not started
-     */
-    const getGameResult = () => {
-        let result = null;
-
-        if (gameState === States.OVER_WON) {
-            result = {message: "GAME OVER!", winnerName: players[activePlayer].name};
-        } else if (gameState === States.OVER_TIE) {
-            result = {message: "GAME TIE!", winnerName: "NO ONE!"};
-        }
-
-        return result;
-    };
 
     /**
      *
@@ -190,19 +185,50 @@ const gameController = (function (board) {
         return players[activePlayer].playerSymbol;
     };
 
-    /**
-     *
-     * @returns {boolean}
-     */
-    const isGameOver = () => gameState === States.OVER_WON || gameState === States.OVER_TIE;
-
     function evaluateGameState() {
         if (board.isAnyRowComplete()) {
             gameState = States.OVER_WON;
             players[activePlayer].win();
+            dispatchGameOverEvent()
         } else if (!board.isAnySpaceLeft()) {
             gameState = States.OVER_TIE;
+            dispatchGameOverEvent()
         }
+    }
+
+    function dispatchGameOverEvent() {
+        const event = new CustomEvent("game-over",{
+            detail: {
+                result: getGameResult(),
+            },
+        });
+
+        document.body.dispatchEvent(event);
+    }
+
+    /**
+     *
+     * @returns {{message: string, winnerName: string, combination: array.<number>|null}|null}
+                game result object or null if game is ongoing or has not started
+     */
+    function getGameResult() {
+        let result = null;
+
+        if (gameState === States.OVER_WON) {
+            result = {
+                message: "GAME OVER!",
+                winnerName: players[activePlayer].name,
+                combination: board.getWinningCombination()
+            };
+        } else if (gameState === States.OVER_TIE) {
+            result = {
+                message: "GAME TIE!",
+                winnerName: "NO ONE!",
+                combination: null
+            };
+        }
+
+        return result;
     }
 
     /**
@@ -223,7 +249,7 @@ const gameController = (function (board) {
         return {getWonGames, win, playerSymbol, name};
     }
 
-    return {startNewGame, takeTurn, playRound, getPlayersData, getGameResult, isGameOver, getActivePlayerSymbol};
+    return {startNewGame, takeTurn, playRound, getPlayersData, getActivePlayerSymbol};
 })(gameboard);
 
 const modalDialog = (function (doc){
