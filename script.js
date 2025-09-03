@@ -225,3 +225,7 @@ const gameController = (function () {
 
     return {startNewGame, takeTurn, playRound, getPlayersData, getGameResult, isGameOver, getActivePlayerSymbol};
 })();
+
+const displayController = (function (){
+
+})();
