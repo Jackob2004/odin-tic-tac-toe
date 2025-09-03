@@ -10,18 +10,50 @@
 </head>
 <body>
 
-    <div class="game-grid">
-        <div class="cell" data-cell-index="0"></div>
-        <div class="cell" data-cell-index="1"></div>
-        <div class="cell" data-cell-index="2"></div>
+    <div class="sidebar">
+        <h1>Tic Tac Toe</h1>
 
-        <div class="cell" data-cell-index="3"></div>
-        <div class="cell" data-cell-index="4"></div>
-        <div class="cell" data-cell-index="5"></div>
+        <button class="start">Start a new game</button>
+    </div>
 
-        <div class="cell" data-cell-index="6"></div>
-        <div class="cell" data-cell-index="7"></div>
-        <div class="cell" data-cell-index="8"></div>
+   <div class="main-game-panel">
+       <div class="game-info">
+           <div class="game-result">
+               <p></p>
+           </div>
+
+            <div class="turn-indicator">
+                <p>Turn: <span></span></p>
+            </div>
+       </div>
+
+       <div class="game-grid">
+           <div class="cell" data-cell-index="0"></div>
+           <div class="cell" data-cell-index="1"></div>
+           <div class="cell" data-cell-index="2"></div>
+
+           <div class="cell" data-cell-index="3"></div>
+           <div class="cell" data-cell-index="4"></div>
+           <div class="cell" data-cell-index="5"></div>
+
+           <div class="cell" data-cell-index="6"></div>
+           <div class="cell" data-cell-index="7"></div>
+           <div class="cell" data-cell-index="8"></div>
+       </div>
+
+       <button class="play-again" disabled>Start a new round</button>
+   </div>
+
+    <div class="stats-panel">
+        <div class="x-player">
+            <p class="name">Nickname: <span></span></p>
+            <p class="won-games">Games won: <span></span></p>
+        </div>
+
+        <div class="o-player">
+            <p class="name">Nickname: <span></span></p>
+            <p class="won-games">Games won: <span></span></p>
+        </div>
     </div>
 
 </body>
