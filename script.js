@@ -228,4 +228,5 @@ const gameController = (function () {
 
 const displayController = (function (){
 
+    return {};
 })();

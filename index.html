@@ -10,6 +10,22 @@
 </head>
 <body>
 
+    <dialog>
+        <form method="dialog">
+
+            <label for="first-player-name">(x) First player name: </label>
+            <input type="text" name="first-player" id="first-player-name" autofocus required maxlength="20">
+
+            <label for="second-player-name">(o) Second player name: </label>
+            <input type="text" name="second-player" id="second-player-name" required maxlength="20">
+
+            <div>
+                <button type="button" id="cancel-btn" formnovalidate>Cancel</button>
+                <button type="submit" id="confirm-btn">Start</button>
+            </div>
+        </form>
+    </dialog>
+
     <div class="sidebar">
         <h1>Tic Tac Toe</h1>
 
