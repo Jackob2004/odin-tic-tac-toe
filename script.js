@@ -252,7 +252,8 @@ const gameController = (function (board) {
     return {startNewGame, takeTurn, playRound, getPlayersData, getActivePlayerSymbol};
 })(gameboard);
 
-const modalDialog = (function (doc){
+// Module handling modal dialog which gets players data
+(function (doc){
     const dialogWindow = doc.querySelector("dialog");
     const form = doc.querySelector("form");
 
@@ -287,10 +288,9 @@ const modalDialog = (function (doc){
         dialogWindow.dispatchEvent(event);
     }
 
-    return {};
 })(document);
 
-const displayController = (function (doc, game){
+// Module handing game UI
+(function (doc, game){
 
-    return {};
 })(document, gameController);
