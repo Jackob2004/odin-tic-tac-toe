@@ -18,7 +18,6 @@ const gameboard = (function () {
      * @param {string} playerSymbol
      * @returns {boolean} true if cell wasn't already occupied
      * @throws {RangeError} on marking index out of array bounds
-     *
      */
     const markSpace = (cellIndex, playerSymbol) => {
         if (cellIndex < 0 || cellIndex > boardState.length - 1) {
@@ -35,23 +34,6 @@ const gameboard = (function () {
         return true;
     };
 
-    /**
-     *
-     * @param {array.<number>} combination array of indices forming a combination
-     * @returns {boolean} true if combination is complete
-     */
-    const checkSingleCombination = (combination) => {
-        const playerSymbol = boardState[combination[0]];
-        if (playerSymbol === null) return false;
-
-        for (let i = 1; i < combination.length; i++) {
-            if (playerSymbol !== boardState[combination[i]]) {
-                return false;
-            }
-        }
-
-        return true;
-    };
 
     /**
      *
@@ -79,6 +61,24 @@ const gameboard = (function () {
         boardState.fill(null);
         takenCells = 0;
     };
+
+    /**
+     *
+     * @param {array.<number>} combination array of indices forming a combination
+     * @returns {boolean} true if combination is complete
+     */
+    function checkSingleCombination(combination) {
+        const playerSymbol = boardState[combination[0]];
+        if (playerSymbol === null) return false;
+
+        for (let i = 1; i < combination.length; i++) {
+            if (playerSymbol !== boardState[combination[i]]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     return {markSpace, isAnyRowComplete, isAnySpaceLeft, resetBoard};
 })();
@@ -125,15 +125,6 @@ const gameController = (function () {
         players.push(secondPlayer);
 
         playRound();
-    };
-
-    const evaluateGameState = () => {
-        if (gameboard.isAnyRowComplete()) {
-            gameState = States.OVER_WON;
-            players[activePlayer].win();
-        } else if (!gameboard.isAnySpaceLeft()) {
-            gameState = States.OVER_TIE;
-        }
     };
 
     /**
@@ -205,6 +196,15 @@ const gameController = (function () {
      */
     const isGameOver = () => gameState === States.OVER_WON || gameState === States.OVER_TIE;
 
+    function evaluateGameState() {
+        if (gameboard.isAnyRowComplete()) {
+            gameState = States.OVER_WON;
+            players[activePlayer].win();
+        } else if (!gameboard.isAnySpaceLeft()) {
+            gameState = States.OVER_TIE;
+        }
+    }
+
     /**
      *
      * @param {string} playerSymbol player marking symbol
@@ -223,5 +223,5 @@ const gameController = (function () {
         return {getWonGames, win, playerSymbol, name};
     }
 
-    return {startNewGame, takeTurn, playRound, getPlayersStats, getGameResult, isGameOver, getActivePlayerSymbol};
+    return {startNewGame, takeTurn, playRound, getPlayersData, getGameResult, isGameOver, getActivePlayerSymbol};
 })();
