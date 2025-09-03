@@ -84,7 +84,7 @@ const gameboard = (function () {
 })();
 
 // module controlling game flow
-const gameController = (function () {
+const gameController = (function (board) {
     const States= Object.freeze({
         PREPARATION: Symbol("preparation"),
         RUNNING:  Symbol("running"),
@@ -108,7 +108,7 @@ const gameController = (function () {
         }
         activePlayer = 0;
         gameState = States.RUNNING;
-        gameboard.resetBoard();
+        board.resetBoard();
     };
 
     /**
@@ -137,7 +137,7 @@ const gameController = (function () {
         if (gameState !== States.RUNNING) return null;
 
         const playerSymbol = players[activePlayer].playerSymbol;
-        if (!gameboard.markSpace(cellIndex, playerSymbol)) return null;
+        if (!board.markSpace(cellIndex, playerSymbol)) return null;
 
         evaluateGameState();
 
@@ -197,10 +197,10 @@ const gameController = (function () {
     const isGameOver = () => gameState === States.OVER_WON || gameState === States.OVER_TIE;
 
     function evaluateGameState() {
-        if (gameboard.isAnyRowComplete()) {
+        if (board.isAnyRowComplete()) {
             gameState = States.OVER_WON;
             players[activePlayer].win();
-        } else if (!gameboard.isAnySpaceLeft()) {
+        } else if (!board.isAnySpaceLeft()) {
             gameState = States.OVER_TIE;
         }
     }
@@ -224,9 +224,9 @@ const gameController = (function () {
     }
 
     return {startNewGame, takeTurn, playRound, getPlayersData, getGameResult, isGameOver, getActivePlayerSymbol};
-})();
+})(gameboard);
 
-const displayController = (function (){
+const displayController = (function (doc, game){
 
     return {};
-})();
+})(document, gameController);
