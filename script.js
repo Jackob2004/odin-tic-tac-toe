@@ -292,5 +292,18 @@ const gameController = (function (board) {
 
 // Module handing game UI
 (function (doc, game){
+    const cells = doc.querySelectorAll(".cell");
+    const playAgainBtn = doc.querySelector("#play-again");
+
+    const finalMessageDisplay = doc.querySelector("#final-message");
+    const winnerNameDisplay = doc.querySelector("#winner-name");
+    const turnIndicatorDisplay = doc.querySelector("#turn-symbol");
+
+    function resetGamePanel() {
+        cells.forEach(cell => cell.replaceChildren());
+        finalMessageDisplay.textContent = "";
+        winnerNameDisplay.textContent = "";
+    }
+
 
 })(document, gameController);

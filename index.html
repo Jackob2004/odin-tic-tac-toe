@@ -33,14 +33,18 @@
     </div>
 
    <div class="main-game-panel">
+
        <div class="game-info">
+
            <div class="game-result">
-               <p></p>
+               <p id="final-message"></p>
+               <p id="winner-name"></p>
            </div>
 
             <div class="turn-indicator">
-                <p>Turn: <span></span></p>
+                <p>Turn: <span id="turn-symbol"></span></p>
             </div>
+
        </div>
 
        <div class="game-grid">
@@ -57,10 +61,11 @@
            <div class="cell" data-cell-index="8"></div>
        </div>
 
-       <button class="play-again" disabled>Start a new round</button>
+       <button id="play-again" disabled>Start a new round</button>
    </div>
 
     <div class="stats-panel">
+
         <div class="x-player">
             <p class="name">Nickname: <span></span></p>
             <p class="won-games">Games won: <span></span></p>
@@ -70,6 +75,7 @@
             <p class="name">Nickname: <span></span></p>
             <p class="won-games">Games won: <span></span></p>
         </div>
+
     </div>
 
 </body>
