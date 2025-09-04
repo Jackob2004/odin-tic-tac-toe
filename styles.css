@@ -143,7 +143,11 @@ body {
     border-top: #dd9999 solid 4px;
 }
 
-#play-again:hover {
+#play-again:disabled {
+    opacity: 0.5;
+}
+
+#play-again:hover:not(:disabled) {
     background-color: #6bb762;
 }
 
