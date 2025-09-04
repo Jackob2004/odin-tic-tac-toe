@@ -23,6 +23,31 @@ body {
     color: var(--pallete-white);
 }
 
+.main-game-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.game-info {
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+
+    width: clamp(100px, 30vw, 500px);
+}
+
+.game-result {
+    justify-self: center;
+
+    text-align: center;
+}
+
+.turn-indicator {
+    align-self: end;
+}
+
 .game-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
