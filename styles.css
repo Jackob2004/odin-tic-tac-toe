@@ -1,5 +1,26 @@
+:root {
+    --pallete-light-gray: #34374C;
+    --pallete-gray: #2C2E3E;
+    --pallete-red: #EE2B47;
+    --pallete-white: #F6F6F6;
+}
+
 body {
+    display: grid;
+    grid-template-columns: 200px 1fr max-content;
     height: 100vh;
+
+    background-color: var(--pallete-light-gray);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    background-color: var(--pallete-gray);
+    color: var(--pallete-white);
 }
 
 .game-grid {
@@ -9,12 +30,14 @@ body {
 
     width: clamp(100px, 30vw, 500px);
     aspect-ratio: 1 / 1;
-    border: 10px solid black;
+    outline: 10px solid var(--pallete-red);
+    outline-offset: -2px;
     border-radius: 10px;
+    background-color: var(--pallete-gray);
 }
 
 .game-grid .cell {
-    border: 1px solid black;
+    border: 1px solid var(--pallete-white);
 }
 
 .highlight {
