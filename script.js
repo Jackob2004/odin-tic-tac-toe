@@ -369,12 +369,15 @@ const gameController = (function (board) {
 
         finalMessageDisplay.textContent = gameResult.message;
         winnerNameDisplay.textContent = "winner: " + gameResult.winnerName;
-        highlightWinningCombination(gameResult.combination);
 
         const playersData = game.getPlayersData();
 
         xPlayerGamesDisplay.textContent = "" + playersData.x.gamesWon;
         oPlayerGamesDisplay.textContent = "" + playersData.o.gamesWon;
+
+        if (gameResult.combination !== null) {
+            highlightWinningCombination(gameResult.combination);
+        }
     }
 
     /**
