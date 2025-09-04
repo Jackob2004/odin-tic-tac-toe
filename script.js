@@ -279,8 +279,10 @@ const gameController = (function (board) {
     function dispatchStartConfirmEvent(firstPlayerName, secondPlayerName) {
         const event = new CustomEvent("start-confirm", {
             detail: {
-                firstPlayer: firstPlayerName,
-                secondPlayer: secondPlayerName,
+                names: {
+                    firstPlayer: firstPlayerName,
+                    secondPlayer: secondPlayerName,
+                },
             },
             bubbles: true,
         });
@@ -326,12 +328,14 @@ const gameController = (function (board) {
     }
 
     function handleGameStart(event) {
-        game.startNewGame(event.detail.firstPlayer, event.detail.secondPlayer);
+        const playerNames = event.detail.names;
+
+        game.startNewGame(playerNames.firstPlayer, playerNames.secondPlayer);
         resetGamePanel();
         playAgainBtn.disabled = false;
 
-        xPlayerNameDisplay.textContent = event.detail.firstPlayer;
-        oPlayerNameDisplay.textContent = event.detail.secondPlayer;
+        xPlayerNameDisplay.textContent = playerNames.firstPlayer;
+        oPlayerNameDisplay.textContent = playerNames.secondPlayer;
         xPlayerGamesDisplay.textContent = oPlayerGamesDisplay.textContent = "0";
 
         turnIndicatorDisplay.textContent = game.getActivePlayerSymbol();
