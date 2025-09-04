@@ -3,6 +3,8 @@
     --pallete-gray: #2C2E3E;
     --pallete-red: #EE2B47;
     --pallete-white: #F6F6F6;
+
+    --grid-width: clamp(100px, 30vw, 500px);
 }
 
 body {
@@ -35,7 +37,7 @@ body {
     display: grid;
     grid-template-rows: 4fr 1fr;
 
-    width: clamp(100px, 30vw, 500px);
+    width: var(--grid-width);
 }
 
 .game-result {
@@ -53,7 +55,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
-    width: clamp(100px, 30vw, 500px);
+    width: var(--grid-width);
     aspect-ratio: 1 / 1;
     outline: 10px solid var(--pallete-red);
     outline-offset: -2px;
@@ -63,6 +65,23 @@ body {
 
 .game-grid .cell {
     border: 1px solid var(--pallete-white);
+}
+
+#play-again {
+    --dark-border: #3a3a79;
+
+    padding: 5px 10px;
+    background-color: #6666ad;
+    color: var(--pallete-white);
+    font-weight: bold;
+    text-shadow: 0 2px 0 var(--dark-border);
+    border-left: var(--dark-border) solid 4px;
+    border-bottom: var(--dark-border) solid 4px;
+    border-top: #9999dd  solid 4px;
+}
+
+#play-again:hover {
+    background-color: #43438a;
 }
 
 .highlight {
