@@ -67,21 +67,40 @@ body {
     border: 1px solid var(--pallete-white);
 }
 
-#play-again {
-    --dark-border: #2f7736;
+#play-again,
+#start-btn {
 
     padding: 5px 10px;
-    background-color: #5fa256;
+    border-right: none;
     color: var(--pallete-white);
     font-weight: bold;
     text-shadow: 0 2px 0 var(--dark-border);
+}
+
+#play-again {
+    --dark-border: #2f7736;
+
+    background-color: #5fa256;
     border-left: var(--dark-border) solid 4px;
     border-bottom: var(--dark-border) solid 4px;
     border-top: #a5dd99 solid 4px;
 }
 
+#start-btn {
+    --dark-border: #8a3232;
+
+    background-color: #a25656;
+    border-left: var(--dark-border) solid 4px;
+    border-bottom: var(--dark-border) solid 4px;
+    border-top: #dd9999 solid 4px;
+}
+
 #play-again:hover {
     background-color: #6bb762;
+}
+
+#start-btn:hover {
+    background-color: #b76262;
 }
 
 .highlight {
