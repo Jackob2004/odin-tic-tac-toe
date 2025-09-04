@@ -292,6 +292,11 @@ const gameController = (function (board) {
 
 // Module handing game UI
 (function (doc, game){
+    const PlayerIcons= Object.freeze({
+        x: Symbol("assets/x-symbol.svg"),
+        o: Symbol("assets/o-symbol.svg"),
+    });
+
     const cells = doc.querySelectorAll(".cell");
     const playAgainBtn = doc.querySelector("#play-again");
 
@@ -305,6 +310,7 @@ const gameController = (function (board) {
     const oPlayerGamesDisplay= doc.querySelector("#o-games");
 
     doc.body.addEventListener("start-confirm", startGame);
+    doc.querySelector(".game-grid").addEventListener("click", markSpace);
 
     function resetGamePanel() {
         cells.forEach(cell => cell.replaceChildren());
@@ -319,12 +325,32 @@ const gameController = (function (board) {
 
         xPlayerNameDisplay.textContent = event.detail.firstPlayer;
         oPlayerNameDisplay.textContent = event.detail.secondPlayer;
-
         xPlayerGamesDisplay.textContent = oPlayerGamesDisplay.textContent = "0";
+
         turnIndicatorDisplay.textContent = game.getActivePlayerSymbol();
     }
 
+    function markSpace(event) {
+        const cellIndex = Number(event.target.dataset.cellIndex);
+        if (Number.isNaN(cellIndex)) return;
 
+        const playerSymbol = game.takeTurn(cellIndex);
+        if (playerSymbol === null) return;
 
+        makeMark(playerSymbol, cellIndex);
+        turnIndicatorDisplay.textContent = game.getActivePlayerSymbol();
+    }
+
+    /**
+     *
+     * @param {string} playerSymbol
+     * @param {number} cellIndex
+     */
+    function makeMark(playerSymbol, cellIndex) {
+        const symbolIcon= document.createElement("img");
+        symbolIcon.src = PlayerIcons[playerSymbol].description;
+
+        cells[cellIndex].appendChild(symbolIcon);
+    }
 
 })(document, gameController);
