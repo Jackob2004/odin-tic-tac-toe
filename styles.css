@@ -20,3 +20,7 @@ body {
 .highlight {
     background-color: lime;
 }
+
+img {
+    user-select: none;
+}

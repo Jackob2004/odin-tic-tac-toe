@@ -360,6 +360,7 @@ const gameController = (function (board) {
     function makeMark(playerSymbol, cellIndex) {
         const symbolIcon= doc.createElement("img");
         symbolIcon.src = PlayerIcons[playerSymbol].description;
+        symbolIcon.draggable = false;
 
         cells[cellIndex].appendChild(symbolIcon);
     }
