@@ -223,7 +223,7 @@ const gameController = (function (board) {
         } else if (gameState === States.OVER_TIE) {
             result = {
                 message: "GAME TIE!",
-                winnerName: "NO ONE!",
+                winnerName: "No one",
                 combination: null
             };
         }
@@ -348,21 +348,21 @@ const gameController = (function (board) {
         const playerSymbol = game.takeTurn(cellIndex);
         if (playerSymbol === null) return;
 
-        makeMark(playerSymbol, cellIndex);
+        makeMark(playerSymbol, event.target);
         turnIndicatorDisplay.textContent = game.getActivePlayerSymbol();
     }
 
     /**
      *
      * @param {string} playerSymbol
-     * @param {number} cellIndex
+     * @param {HTMLDivElement} cell
      */
-    function makeMark(playerSymbol, cellIndex) {
+    function makeMark(playerSymbol, cell) {
         const symbolIcon= doc.createElement("img");
         symbolIcon.src = PlayerIcons[playerSymbol].description;
         symbolIcon.draggable = false;
 
-        cells[cellIndex].appendChild(symbolIcon);
+        cell.appendChild(symbolIcon);
     }
 
     function handleGameOver(event) {
