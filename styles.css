@@ -40,6 +40,12 @@ body {
     width: var(--grid-width);
 }
 
+.game-result,
+.turn-indicator {
+    color: var(--pallete-white);
+    font-weight: bold;
+}
+
 .game-result {
     justify-self: center;
 
@@ -48,6 +54,11 @@ body {
 
 .turn-indicator {
     align-self: end;
+}
+
+#turn-symbol,
+#winner-name{
+    font-style: italic;
 }
 
 .game-grid {
@@ -104,7 +115,7 @@ body {
 }
 
 .highlight {
-    background-color: lime;
+    background-color: var(--pallete-red);
 }
 
 img {

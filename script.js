@@ -174,7 +174,6 @@ const gameController = (function (board) {
         };
     };
 
-
     /**
      *
      * @returns {string|null} symbol of a player whose turn it is right now or null if game has not started
