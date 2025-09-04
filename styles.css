@@ -68,20 +68,20 @@ body {
 }
 
 #play-again {
-    --dark-border: #3a3a79;
+    --dark-border: #2f7736;
 
     padding: 5px 10px;
-    background-color: #6666ad;
+    background-color: #5fa256;
     color: var(--pallete-white);
     font-weight: bold;
     text-shadow: 0 2px 0 var(--dark-border);
     border-left: var(--dark-border) solid 4px;
     border-bottom: var(--dark-border) solid 4px;
-    border-top: #9999dd  solid 4px;
+    border-top: #a5dd99 solid 4px;
 }
 
 #play-again:hover {
-    background-color: #43438a;
+    background-color: #6bb762;
 }
 
 .highlight {
