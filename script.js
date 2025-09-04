@@ -309,16 +309,18 @@ const gameController = (function (board) {
     const oPlayerNameDisplay = doc.querySelector("#o-name");
     const oPlayerGamesDisplay= doc.querySelector("#o-games");
 
-    doc.body.addEventListener("start-confirm", startGame);
+    doc.body.addEventListener("start-confirm", handleGameStart);
     doc.querySelector(".game-grid").addEventListener("click", markSpace);
+    doc.body.addEventListener("game-over", handleGameOver);
 
     function resetGamePanel() {
         cells.forEach(cell => cell.replaceChildren());
+        cells.forEach(cell => cell.classList.remove("highlight"));
         finalMessageDisplay.textContent = "";
         winnerNameDisplay.textContent = "";
     }
 
-    function startGame(event) {
+    function handleGameStart(event) {
         game.startNewGame(event.detail.firstPlayer, event.detail.secondPlayer);
         resetGamePanel();
         playAgainBtn.disabled = false;
@@ -347,10 +349,33 @@ const gameController = (function (board) {
      * @param {number} cellIndex
      */
     function makeMark(playerSymbol, cellIndex) {
-        const symbolIcon= document.createElement("img");
+        const symbolIcon= doc.createElement("img");
         symbolIcon.src = PlayerIcons[playerSymbol].description;
 
         cells[cellIndex].appendChild(symbolIcon);
+    }
+
+    function handleGameOver(event) {
+        const gameResult = event.detail.result;
+
+        finalMessageDisplay.textContent = gameResult.message;
+        winnerNameDisplay.textContent = "winner: " + gameResult.winnerName;
+        highlightWinningCombination(gameResult.combination);
+
+        const playersData = game.getPlayersData();
+
+        xPlayerGamesDisplay.textContent = "" + playersData.x.gamesWon;
+        oPlayerGamesDisplay.textContent = "" + playersData.o.gamesWon;
+    }
+
+    /**
+     *
+     * @param {array.<number>} combination
+     */
+    function highlightWinningCombination(combination) {
+        for (const idx of combination) {
+            cells[idx].classList.add("highlight");
+        }
     }
 
 })(document, gameController);

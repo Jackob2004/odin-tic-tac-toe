@@ -16,3 +16,7 @@ body {
 .game-grid .cell {
     border: 1px solid black;
 }
+
+.highlight {
+    background-color: lime;
+}
