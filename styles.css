@@ -37,6 +37,7 @@ body {
 .game-info {
     display: grid;
     grid-template-rows: 4fr 1fr;
+    gap: 1rem;
 
     width: var(--grid-width);
 }
@@ -51,10 +52,12 @@ body {
     justify-self: center;
 
     text-align: center;
+    font-size: 1.6rem;
 }
 
 .turn-indicator {
     align-self: end;
+    font-size: 1.3rem;
 }
 
 #turn-symbol,
@@ -92,6 +95,8 @@ body {
 #play-again {
     --dark-border: #2f7736;
 
+    width: calc(var(--grid-width) / 2);
+    margin-bottom: 20px;
     background-color: #5fa256;
     border-left: var(--dark-border) solid 4px;
     border-bottom: var(--dark-border) solid 4px;
