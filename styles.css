@@ -9,7 +9,7 @@
 
 body {
     display: grid;
-    grid-template-columns: max(200px, 20vw) 1fr;
+    grid-template-columns: max(250px, 20vw) 1fr;
     height: 100vh;
 
     background-color: var(--pallete-light-gray);
@@ -20,10 +20,40 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 5rem;
 
     background-color: var(--pallete-gray);
     color: var(--pallete-white);
+    outline: 8px ridge var(--pallete-white);
+}
+
+.sidebar h1 {
+    font-size: 2.3rem;
+}
+
+.stats-panel {
+    padding: 20px;
+    width: 100%;
+    background-color: var(--pallete-light-gray);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    margin-top: 1rem;
+}
+
+.stats-content {
+    font-style: italic;
+    text-decoration: wavy underline var(--pallete-white);
+}
+
+.stats-container div {
+    flex: auto;
 }
 
 .main-game-panel {
@@ -106,6 +136,7 @@ body {
 #start-btn {
     --dark-border: #8a3232;
 
+    width: 80%;
     background-color: #a25656;
     border-left: var(--dark-border) solid 4px;
     border-bottom: var(--dark-border) solid 4px;
