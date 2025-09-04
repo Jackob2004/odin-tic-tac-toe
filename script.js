@@ -299,11 +299,32 @@ const gameController = (function (board) {
     const winnerNameDisplay = doc.querySelector("#winner-name");
     const turnIndicatorDisplay = doc.querySelector("#turn-symbol");
 
+    const xPlayerNameDisplay = doc.querySelector("#x-name");
+    const xPlayerGamesDisplay= doc.querySelector("#x-games");
+    const oPlayerNameDisplay = doc.querySelector("#o-name");
+    const oPlayerGamesDisplay= doc.querySelector("#o-games");
+
+    doc.body.addEventListener("start-confirm", startGame);
+
     function resetGamePanel() {
         cells.forEach(cell => cell.replaceChildren());
         finalMessageDisplay.textContent = "";
         winnerNameDisplay.textContent = "";
     }
+
+    function startGame(event) {
+        game.startNewGame(event.detail.firstPlayer, event.detail.secondPlayer);
+        resetGamePanel();
+        playAgainBtn.disabled = false;
+
+        xPlayerNameDisplay.textContent = event.detail.firstPlayer;
+        oPlayerNameDisplay.textContent = event.detail.secondPlayer;
+
+        xPlayerGamesDisplay.textContent = oPlayerGamesDisplay.textContent = "0";
+        turnIndicatorDisplay.textContent = game.getActivePlayerSymbol();
+    }
+
+
 
 
 })(document, gameController);
