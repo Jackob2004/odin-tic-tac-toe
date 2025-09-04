@@ -310,8 +310,13 @@ const gameController = (function (board) {
     const oPlayerGamesDisplay= doc.querySelector("#o-games");
 
     doc.body.addEventListener("start-confirm", handleGameStart);
-    doc.querySelector(".game-grid").addEventListener("click", markSpace);
     doc.body.addEventListener("game-over", handleGameOver);
+    doc.querySelector(".game-grid").addEventListener("click", markSpace);
+
+    playAgainBtn.addEventListener("click", () => {
+        resetGamePanel();
+        game.playRound();
+    });
 
     function resetGamePanel() {
         cells.forEach(cell => cell.replaceChildren());
