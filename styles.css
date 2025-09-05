@@ -5,6 +5,7 @@
     --pallete-white: #F6F6F6;
 
     --grid-width: clamp(100px, 30vw, 500px);
+    --form-btn-width: 90px;
 }
 
 body {
@@ -13,6 +14,71 @@ body {
     height: 100vh;
 
     background-color: var(--pallete-light-gray);
+}
+
+dialog {
+    margin: auto;
+    padding: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--pallete-gray);
+}
+
+::backdrop {
+    background-color: var(--pallete-white);
+    opacity: 0.4;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    color: var(--pallete-white);
+}
+
+label {
+    display: block;
+}
+
+input {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--pallete-light-gray);
+    color: var(--pallete-white);
+}
+
+input:focus {
+    outline: none;
+}
+
+form div {
+    display: flex;
+    justify-content: space-around;
+}
+
+#cancel-start-btn {
+    --dark-border: #776b2f;
+
+    width: var(--form-btn-width);
+    background-color: #a29556;
+    border-left: var(--dark-border) solid 4px;
+    border-bottom: var(--dark-border) solid 4px;
+    border-top: #ddd799 solid 4px;
+}
+
+#cancel-start-btn:hover {
+    background-color: #b7ac62;
+}
+
+#confirm-start-btn {
+    width: var(--form-btn-width);
+}
+
+#confirm-start-btn:hover {
+    background-color: #6bb762;
 }
 
 .sidebar {
@@ -112,25 +178,9 @@ body {
     border: 1px solid var(--pallete-white);
 }
 
-#play-again,
-#start-btn {
-
-    padding: 5px 10px;
-    border-right: none;
-    color: var(--pallete-white);
-    font-weight: bold;
-    text-shadow: 0 2px 0 var(--dark-border);
-}
-
 #play-again {
-    --dark-border: #2f7736;
-
     width: calc(var(--grid-width) / 2);
     margin-bottom: 20px;
-    background-color: #5fa256;
-    border-left: var(--dark-border) solid 4px;
-    border-bottom: var(--dark-border) solid 4px;
-    border-top: #a5dd99 solid 4px;
 }
 
 #start-btn {
@@ -161,4 +211,21 @@ body {
 
 img {
     user-select: none;
+}
+
+button {
+    padding: 5px 10px;
+    border-right: none;
+    color: var(--pallete-white);
+    font-weight: bold;
+    text-shadow: 0 2px 0 var(--dark-border);
+}
+
+.green-button {
+    --dark-border: #2f7736;
+
+    background-color: #5fa256;
+    border-left: var(--dark-border) solid 4px;
+    border-bottom: var(--dark-border) solid 4px;
+    border-top: #a5dd99 solid 4px;
 }

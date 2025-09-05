@@ -12,16 +12,19 @@
 
     <dialog>
         <form method="dialog">
+            <p>
+                <label for="first-player-name">(x) First player name: </label>
+                <input type="text" name="first-player" id="first-player-name" autofocus required maxlength="20">
+            </p>
 
-            <label for="first-player-name">(x) First player name: </label>
-            <input type="text" name="first-player" id="first-player-name" autofocus required maxlength="20">
-
-            <label for="second-player-name">(o) Second player name: </label>
-            <input type="text" name="second-player" id="second-player-name" required maxlength="20">
+            <p>
+                <label for="second-player-name">(o) Second player name: </label>
+                <input type="text" name="second-player" id="second-player-name" required maxlength="20">
+            </p>
 
             <div>
                 <button type="button" id="cancel-start-btn" formnovalidate>Cancel</button>
-                <button type="submit" id="confirm-start-btn">Start</button>
+                <button type="submit" class="green-button" id="confirm-start-btn">Start</button>
             </div>
         </form>
     </dialog>
@@ -78,7 +81,7 @@
            <div class="cell" data-cell-index="8"></div>
        </div>
 
-       <button id="play-again" disabled>Start a new round</button>
+       <button class="green-button" id="play-again" disabled>Start a new round</button>
    </div>
 
 
