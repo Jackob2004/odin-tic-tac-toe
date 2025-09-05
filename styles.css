@@ -5,9 +5,12 @@
     --pallete-white: #F6F6F6;
 
     --grid-width: clamp(100px, 30vw, 500px);
-    --form-btn-width: 90px;
-}
 
+    --form-btn-width: 90px;
+
+    --border-radius: 10px;
+}
+/* main layout */
 body {
     display: grid;
     grid-template-columns: max(250px, 20vw) 1fr;
@@ -15,12 +18,12 @@ body {
 
     background-color: var(--pallete-light-gray);
 }
-
+/* dialog window */
 dialog {
     margin: auto;
     padding: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background-color: var(--pallete-gray);
 }
 
@@ -28,7 +31,7 @@ dialog {
     background-color: var(--pallete-white);
     opacity: 0.4;
 }
-
+/* form contents */
 form {
     display: flex;
     flex-direction: column;
@@ -45,7 +48,7 @@ input {
     margin-top: 5px;
     padding: 5px 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background-color: var(--pallete-light-gray);
     color: var(--pallete-white);
 }
@@ -58,7 +61,7 @@ form div {
     display: flex;
     justify-content: space-around;
 }
-
+/* form buttons */
 #cancel-start-btn {
     --dark-border: #776b2f;
 
@@ -80,14 +83,14 @@ form div {
 #confirm-start-btn:hover {
     background-color: #6bb762;
 }
-
+/* sidebar panel */
 .sidebar {
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5rem;
 
+    padding: 2rem;
     background-color: var(--pallete-gray);
     color: var(--pallete-white);
     outline: 8px ridge var(--pallete-white);
@@ -96,12 +99,26 @@ form div {
 .sidebar h1 {
     font-size: 2.3rem;
 }
+/* sidebar start game button */
+#start-btn {
+    --dark-border: #8a3232;
 
+    width: 80%;
+    background-color: #a25656;
+    border-left: var(--dark-border) solid 4px;
+    border-bottom: var(--dark-border) solid 4px;
+    border-top: #dd9999 solid 4px;
+}
+
+#start-btn:hover {
+    background-color: #b76262;
+}
+/* stats display */
 .stats-panel {
     padding: 20px;
     width: 100%;
     background-color: var(--pallete-light-gray);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     text-align: center;
 }
 
@@ -121,7 +138,7 @@ form div {
 .stats-container div {
     flex: auto;
 }
-
+/* main section */
 .main-game-panel {
     display: flex;
     flex-direction: column;
@@ -129,7 +146,7 @@ form div {
     justify-content: center;
     gap: 50px;
 }
-
+/* game info displays */
 .game-info {
     display: grid;
     grid-template-rows: 4fr 1fr;
@@ -153,6 +170,7 @@ form div {
 
 .turn-indicator {
     align-self: end;
+
     font-size: 1.3rem;
 }
 
@@ -160,7 +178,7 @@ form div {
 #winner-name{
     font-style: italic;
 }
-
+/* game board */
 .game-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -170,7 +188,7 @@ form div {
     aspect-ratio: 1 / 1;
     outline: 10px solid var(--pallete-red);
     outline-offset: -2px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background-color: var(--pallete-gray);
 }
 
@@ -178,19 +196,17 @@ form div {
     border: 1px solid var(--pallete-white);
 }
 
+.highlight {
+    background-color: var(--pallete-red);
+}
+
+img {
+    user-select: none;
+}
+/* game panel button */
 #play-again {
     width: calc(var(--grid-width) / 2);
     margin-bottom: 20px;
-}
-
-#start-btn {
-    --dark-border: #8a3232;
-
-    width: 80%;
-    background-color: #a25656;
-    border-left: var(--dark-border) solid 4px;
-    border-bottom: var(--dark-border) solid 4px;
-    border-top: #dd9999 solid 4px;
 }
 
 #play-again:disabled {
@@ -201,18 +217,7 @@ form div {
     background-color: #6bb762;
 }
 
-#start-btn:hover {
-    background-color: #b76262;
-}
-
-.highlight {
-    background-color: var(--pallete-red);
-}
-
-img {
-    user-select: none;
-}
-
+/* common button styles */
 button {
     padding: 5px 10px;
     border-right: none;
